@@ -39,7 +39,7 @@
 
  + [1.14 Parsing Fixed-Width Field Data Records](#1.14)
 
- +[1.15 Taking Strings Apart(Lấy chuỗi ngoài)](#1.15)
+ + [1.15 Taking Strings Apart(Lấy chuỗi ngoài)](#1.15)
 
 
 
