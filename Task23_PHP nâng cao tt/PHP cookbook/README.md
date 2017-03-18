@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 16/02/2017
+>Ngày cập nhật: 19/03/2017
 
 ##Mục lục:
 
@@ -1053,7 +1053,7 @@ $nums = unpack('S4',$packed);
 
  + Các tiêu đề đầu tiên, Content-Type, cho trình duyệt mà đầu ra không phải là HTML, nhưng CSV. Các tiêu đề thứ hai, Content-Disposition, cho trình duyệt không hiển thị đầu ra nhưng cố gắng để tải một chương trình bên ngoài để xử lý nó. Các thuộc tính tên tập tin của tiêu đề này cung cấp một tên tập tin mặc định cho trình duyệt để sử dụng cho các tập tin tải về.
 
- 
+
 
 
 
