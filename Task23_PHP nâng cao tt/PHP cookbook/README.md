@@ -870,7 +870,7 @@ $words = explode(' ','My sentence is not very complicated');
 
 ####1.16 Wrapping Text at a Certain Line Length<a name="1.16"></a>
 
-**Đặt vấn đề**: Bạn cần phải bọc các dòng trong một chuỗi. Ví dụ: bạn muốn hiển thị văn bản bằng cách sử dụng thẻ <pre> và </ pre> nhưng giữ nó trong một cửa sổ trình duyệt kích thước thông thường.
+**Đặt vấn đề**: Bạn cần phải bọc các dòng trong một chuỗi. Ví dụ: bạn muốn hiển thị văn bản bằng cách sử dụng thẻ `<pre>` và `</pre>` nhưng giữ nó trong một cửa sổ trình duyệt kích thước thông thường.
 
 **Cách giải quyết**: Dùng `wordwrap()`:
 
