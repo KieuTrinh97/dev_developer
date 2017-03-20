@@ -873,7 +873,7 @@ Giá trị sẽ được chuyển về file proccess
 
      array_unique($array): loại bỏ những phần tử trùng nhau trong mảng và trả về mảng mới.
 
-       ```sh
+      ```sh
         
           <?php
             $courses  = array("name" => "PHP","PHP", "Joomla", "Zend", "jQuery" );
@@ -889,13 +889,13 @@ Giá trị sẽ được chuyển về file proccess
             echo "</pre>";
           ?>
         
-       ```
+      ```
 
     **Vấn đề 8: Xóa phần tử ở vị trí bất kỳ trong mảng**
 
      Sử dụng hàm unset để xóa bỏ phần tử ở vị trí bất kỳ trong mảng. 
 
-       ```sh
+      ```sh
             <?php
               $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
 
@@ -909,7 +909,7 @@ Giá trị sẽ được chuyển về file proccess
               print_r($course);
               echo "</pre>";
             ?>
-       ```
+      ```
 
     **Vấn đề 9: Thêm một hoặc nhiều phần tử ở đầu hoặc cuối mảng**
 
@@ -919,7 +919,7 @@ Giá trị sẽ được chuyển về file proccess
 
       >Thêm vào cuối mảng
 
-       ```sh
+      ```sh
             <?php
               $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
 
@@ -933,11 +933,11 @@ Giá trị sẽ được chuyển về file proccess
               print_r($course);
               echo "</pre>";
             ?>
-       ```
+      ```
 
       >Thêm vào đầu mảng
 
-       ```sh
+      ```sh
             <?php
               $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
 
@@ -951,7 +951,7 @@ Giá trị sẽ được chuyển về file proccess
               print_r($course);
               echo "</pre>";
             ?>
-       ```
+      ```
 
        
     **Vấn đề 10: Đảo ngược vị trí các phần tử của mảng?**
@@ -960,7 +960,7 @@ Giá trị sẽ được chuyển về file proccess
 
       >Ví dụ
 
-        ```sh
+      ```sh
             <?php
               $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
 
@@ -974,7 +974,7 @@ Giá trị sẽ được chuyển về file proccess
               print_r($newArr);
               echo "</pre>";
             ?>
-        ```
+      ```
 
     **Vấn đề 11: Hoán đổi chỉ số và giá trị của mảng (đảo $key và $value)?**
 
