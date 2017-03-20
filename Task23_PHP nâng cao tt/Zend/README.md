@@ -806,9 +806,9 @@ Giá trị sẽ được chuyển về file proccess
           ?>
       ```
 
-       >Lấy keys
+      >Lấy keys
 
-       ```sh
+      ```sh
           <?php
             $courses  = array("name" => "PHP", "time" => 200);
 
@@ -822,7 +822,7 @@ Giá trị sẽ được chuyển về file proccess
             print_r($newArr);
             echo "</pre>";
           ?>
-       ```
+      ```
 
     **Vấn đề 6: Loại bỏ phần tử ở đầu và cuối mảng**
 
@@ -831,9 +831,9 @@ Giá trị sẽ được chuyển về file proccess
       array_shift($array): Loại bỏ phần tử đầu tiên của mảng. Hàm tả về phần tuư đầu tiên đã đượ loại bỏ.
 
 
-       >Loại bỏ phần tử cuối 
+      >Loại bỏ phần tử cuối 
 
-       ```sh
+      ```sh
           <?php
             $courses  = array("PHP", "Joomla", "Zend", "jQuery");
 
@@ -848,7 +848,7 @@ Giá trị sẽ được chuyển về file proccess
             echo "</pre>";
 
           ?>
-       ```
+      ```
 
       >Loại bỏ phần tử đầu 
 
