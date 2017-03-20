@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 20/02/2017
+>Ngày cập nhật: 20/03/2017
 
 ##Mục lục:
 [Chương I: PHP cơ bản](#I)
@@ -33,6 +33,8 @@
       + [1.2Mảng liên tục](#1.2)
 
       + [1.3Mảng không liên tục](#1.3)
+
+      + [1.4Các vấn đề](#1.4)
 
 
 
@@ -780,7 +782,276 @@ Giá trị sẽ được chuyển về file proccess
         echo($students["SV003"]["score"]."<br>");
        ```
 
+    **Vấn đề 5: Lấy danh sách các khóa và danh sách các gia strij của một mảng nào đó?**<a name="1.4"></a>
+
+      array_values($array) trả về một mảng liên tục có các phần tử có giá trị là giá trị lấy các phần tử của mảng `$array`.
+
+      array_keys($array): trả về một mảng liên tục có các phần tử có giá trị là khóa lấy từ các phần tử của mảng `$array`.
+
+      >Lấy values
+
+      ```sh
+          <?php
+            $courses  = array("name" => "PHP", "time" => 200);
+
+            echo "<pre>";
+            print_r($course);
+            echo "</pre>";
+
+            $newArr = array_values($course);
+
+            echo "<pre>";
+            print_r($newArr);
+            echo "</pre>";
+          ?>
+      ```
+
+       >Lấy keys
+
+       ```sh
+          <?php
+            $courses  = array("name" => "PHP", "time" => 200);
+
+            echo "<pre>";
+            print_r($course);
+            echo "</pre>";
+
+            $newArr = array_keys($course);
+
+            echo "<pre>";
+            print_r($newArr);
+            echo "</pre>";
+          ?>
+       ```
+
+       **Vấn đề 6: Loại bỏ phần tử ở đầu và cuối mảng**
+
+       array_pop($array): Loại bỏ phần tử cuối cùng của mảng. Hàm trả về phần tử cuối cùng đã được loại bỏ.
+
+       array_shift($array): Loại bỏ phần tử đầu tiên của mảng. Hàm tả về phần tuư đầu tiên đã đượ loại bỏ.
+
+
+       >Loại bỏ phần tử cuối 
+
+       ```sh
+          <?php
+            $courses  = array("PHP", "Joomla", "Zend", "jQuery");
+
+            echo "<pre>";
+            print_r($course);
+            echo "</pre>";
+
+            echo $lastItem  = array_pop($course);
+
+            echo "<pre>";
+            print_r($course);
+            echo "</pre>";
+
+          ?>
+       ```
+
+      >Loại bỏ phần tử đầu 
+
+      ```sh
+          <?php
+            $courses  = array("PHP", "Joomla", "Zend", "jQuery");
+
+            echo "<pre>";
+            print_r($course);
+            echo "</pre>";
+
+            echo $firstItem  = array_shift($course);
+
+            echo "<pre>";
+            print_r($course);
+            echo "</pre>";
+
+          ?>
+      ```
+
+    **Vấn đề 7: Loại bỏ phần tử trùng nhau trong mảng?**
+
+     array_unique($array): loại bỏ những phần tử trùng nhau trong mảng và trả về mảng mới.
+
+       ```sh
+        
+          <?php
+            $courses  = array("name" => "PHP","PHP", "Joomla", "Zend", "jQuery" );
+
+            echo "<pre>";
+            print_r($course);
+            echo "</pre>";
+
+            $newArr = array_unique($course);
+
+            echo "<pre>";
+            print_r($newArr);
+            echo "</pre>";
+          ?>
+        
+       ```
+
+    **Vấn đề 8: Xóa phần tử ở vị trí bất kỳ trong mảng**
+
+     Sử dụng hàm unset để xóa bỏ phần tử ở vị trí bất kỳ trong mảng. 
+
+       ```sh
+            <?php
+              $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              unset($course[0]);
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+            ?>
+       ```
+
+    **Vấn đề 9: Thêm một hoặc nhiều phần tử ở đầu hoặc cuối mảng**
+
+      array_push($array,$val1,$val2,...,$valn) thêm một hoặc nhiều phần tử vào cuối mảng $array. Hàm trả về kiểu số nguyên là số lượng phần tử của mảng $array mới.
+
+      array_unshift($array,$val1,$val2,...,$valn) thêm một hoặc  nhiều phần tử vào đầu mảng $array. Hàm trả về kiểu số nguyên là số lượng phần trư của mảng $array mới.
+
+      >Thêm vào cuối mảng
+
+       ```sh
+            <?php
+              $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              echo $length  = array_push($course,"HTML","CSS");
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+            ?>
+       ```
+
+      >Thêm vào đầu mảng
+
+       ```sh
+            <?php
+              $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              echo $length  = array_unshift($course,"HTML","CSS");
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+            ?>
+       ```
+
        
+    **Vấn đề 10: Đảo ngược vị trí các phần tử của mảng?**
+
+      array_reverse($array) đảo ngược vị trí các phần tử của mảng, phần tử cuối trở thành phần tử đầu tiên, phần tử kế cuối trở thành phần tử thứ nhì,... kết quả về là mảng mới.
+
+      >Ví dụ
+
+        ```sh
+            <?php
+              $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              $newArr  = array_revese($course);
+
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+            ?>
+        ```
+
+    **Vấn đề 11: Hoán đổi chỉ số và giá trị của mảng (đảo $key và $value)?**
+
+      Sử dụng hàm array_flip($array) trả về một mảng có khóa và giá trị được hoán đổi cho nhau so với mảng $array (giá trị thành khóa và khóa thành giá trị)
+
+      >Ví dụ
+
+      ```sh
+            <?php
+              $courses  = array("PHP", "Joomla", "Zend", "jQuery" );
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              $newArr  = array_flip($course);
+
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+            ?>
+      ```
+
+    **Vấn đề 12: Xác định tổng, GTLN và GTNN trong mảng?**
+
+      + Tính tổng các phần tử trong mảng array_sum ($array)
+
+      + Xác định phần tử nhỏ nhất trong mảng min($array)
+
+      + Xác định phần tử lớn nhất trong mảng max($array)
+
+      >Ví dụ
+
+      ```sh
+            <?php
+              $score  = array(2,3,5,1,3,5,7,2);
+
+              $sum = array_sum($score);
+
+              echo "<pre>";
+              print_r($score);
+              echo "</pre>";
+
+              echo $sum;
+            ?>
+      ```
+
+    **Vấn đề 13: Thống kê số lần xuất hiện của các phần tử trong mảng?**
+
+      Để thống kê sự xuất hiện của các phần tử trong mảng chúng ta sử dụng hàm array_count_values(array)
+
+      >Ví dụ
+
+      ```sh
+            <?php
+              $scorce = array(2,3,5,1,3,5,7,2);
+
+              $newArr = array_count_values($score);
+
+              echo "<pre>";
+              print_r($score);
+              echo "</pre>";
+
+              $newArr  = array_revese($course);
+
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+            ?>
+      ```
+
+
+
+
+
+
+
 
 
 
