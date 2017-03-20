@@ -824,11 +824,11 @@ Giá trị sẽ được chuyển về file proccess
           ?>
        ```
 
-       **Vấn đề 6: Loại bỏ phần tử ở đầu và cuối mảng**
+    **Vấn đề 6: Loại bỏ phần tử ở đầu và cuối mảng**
 
-       array_pop($array): Loại bỏ phần tử cuối cùng của mảng. Hàm trả về phần tử cuối cùng đã được loại bỏ.
+      array_pop($array): Loại bỏ phần tử cuối cùng của mảng. Hàm trả về phần tử cuối cùng đã được loại bỏ.
 
-       array_shift($array): Loại bỏ phần tử đầu tiên của mảng. Hàm tả về phần tuư đầu tiên đã đượ loại bỏ.
+      array_shift($array): Loại bỏ phần tử đầu tiên của mảng. Hàm tả về phần tuư đầu tiên đã đượ loại bỏ.
 
 
        >Loại bỏ phần tử cuối 
