@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 20/03/2017
+>Ngày cập nhật: 17/04/2017
 
 ##Mục lục:
 [Chương I: PHP cơ bản](#I)
@@ -1045,6 +1045,407 @@ Giá trị sẽ được chuyển về file proccess
               echo "</pre>";
             ?>
       ```
+
+    **Vấn đề 14: Kết hợp các mảng lại với nhau?**
+
+    + `array_merge($array1,$array1,...,$arrayn)` nhập 2 hay nhiều mảng thành một mảng duy nhất và trả về mảng mới.
+
+
+     ```sh
+      <?php
+          $array1 = array("a","b","c");
+          $array2 = array(2,4,6);
+          $array3 = array("php" => "PHP","jl" => "Joomla");
+
+          $newArray = array_merge($array1, $array2,$array3);
+
+          echo "<pre>";
+          print_r($newArray);
+          echo "</pre>";
+      ?>
+     ```
+
+    **Vấn đề 15: Lấy ngẫu nhiên chỉ số ($key) của một mảng nào đó?**
+
+    + `array_rand ($array, $number)` Lấy ngẫu nhiên $number phần tử từ mảng $array và đưa vào mảng mới (lấy giá trị khóa).
+
+      ```sh
+          <?php
+
+              $course  = array("php" => "PHP","jl" => "Joomla", "zend" => "Zend");
+
+              $keyArray = array_rand($course, 2);
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($keyArray);
+              echo "</pre>";
+          ?>
+      ```
+
+    **Vấn đề 16: Tìm kiếm phần tử trong mảng**
+
+    + `array_search($value,$array)` tìm phần tử mang giá trị $value trong mảng $array. Trả  về khóa của phần tử tìm được.
+
+      ```sh
+          >?php
+              $course  = array("php" => "PHP","jl" => "Joomla", "zend" => "Zend");
+
+              echo $key1  = array_search("Jommla", $course);
+          ?>
+      ```
+
+    **Vấn đề 17: Kiểm tra một $key hoặc $value nào đó có tồn tại trong mảng hay không?**
+
+    + `array_key_exists($key, $array)` kiểm tra khóa $key có tồn tại trong mảng $array hay không? Nếu có trả về giá trị true.
+
+    + `in_array($value, $array)` kiểm tra giá trị $value có tồn tại trong mảng $array hay không? Nếu ó trả vêf giá trị true.
+
+      ```sh
+          <?php
+              $course  = array("php" => "PHP","jl" => "Joomla", "zend" => "Zend");
+
+              if(array_key_exists("php1",$course)){
+                echo "Exiists";
+              }
+          ?>
+      ```
+
+    **Vấn đề 18: Chuyển đổi các key trong mảng thành chữ hoa hoặc chữ thường**
+    
+    + Sử dụng hàm `array_change_key_case($array, case)` để chuyển đổi các chỉ số ($key) trong mảng thành chữ hoa hoặc chữ thường, tùy thuộc vào tham số case truyền vào. Kết quả trả về của hàm là một mảng mới. 
+
+      ```sh
+          <?php
+              $course  = array("pHp" => "PHP","jl" => "Joomla", "zend" => "Zend");
+
+              $newArray = array_change_case($course, CASE_LOWER);
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($snewArr);
+              echo "</pre>";
+          ?>
+      ```
+
+    **Vấn đề 19: Chuyển đổi qua lại giữa mảng và chuỗi?**
+
+    + `implode($str,$array)` chuyển các giá trị của mảng $array thành một chuỗi bao gồm các phần tử cách nhau bởi ký tự $str.
+
+    + `explode($delimiter, $str)` chuyển một chuỗi thành một mảng. tác h chuỗi dựa vào $delimiter, mỗi đoạn tách ra sẽ thành một phần tử của mảng mới.
+
+      ```sh
+          <?php
+              $course  = array("PHP","Joomla","Zend");
+
+              echo $str = implode("-^-",$course);
+
+          ?>
+      ```
+
+
+      ```sh
+          <?php
+
+              $fullName = "Vo Thi Kieu Trinh";
+
+              $array = explode("***",$fullName);
+
+
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+
+          ?>
+      ```
+
+    **Vấn đề 20: Truy xuất phần tử của mảng với end, current, next và previous**
+
+    + `current($array)` truy xuất phần tử hiện tại của mảng
+
+    + `end($array)` truy xuất phần tử cuối cùng của mảng
+
+    + `next($array)` truy xuất phần tử sau phần tử hiện tại của mảng
+
+    + `previous($array)` truy xuất phần tử trước phần tử hiện tại của mảng
+
+    + `reset()` quay về vị trí phần tử đầu tiên trong mảng.
+
+      ```sh
+          <?php
+              $course  = array("PHP","Joomla","Zend");
+
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              echo "Current: ". curent($course)."<br/>";
+              //PHP
+
+               echo "Next: ". curent($course)."<br/>";
+               //Joomla
+          ?>
+      ```
+
+    **Vấn đề 21: Chuyển đổi mảng về một chuỗi đặc biệt và ngược lại? **
+
+    + `serialize($value)` chyển chuỗi/mảng/đối tượng $value thành một chuỗi đặ c biệt để lưu vào cơ sở dữ liệu.
+
+    + `unserialize($value)` chuyển chuỗi đặc biệt được tạo từ serialize($value) về trạng thá ban đầu.
+
+      ```sh
+          <?php
+              $courses  = array("name" => "PHP", "time" => 80,100);
+
+              echo "<pre>";
+              print_r($course);
+              echo "</pre>";
+
+              $result = serialize($course);
+
+              echo $result;
+
+          ?>
+      ```
+
+    **Vấn đề 22: Xáo trộn thứ tự các phần tử trong mảng?**
+
+    + Sử dụng hàm `shuffle` để tạo ra mảng mới (mảng liên tục) với thứ tự các phần trư tron g mảng bị thay đổi.
+
+      ```sh
+          <?php
+              $array =  array(1,2,3,4,5,6,7,8,9);
+
+              shuffle($array);
+
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+
+          ?>
+      ```
+
+    **Vấn đề 23: Tạo mảng từ các biến đã có sẵn?**
+    
+    + Sử dụng hàm `compact()` để tạo ra mảng mới từ các biến có sẵn.
+
+      ```sh
+          <?php
+
+              $name = "PHP";
+              $time = 100;
+
+              $array = compact("name","time");
+
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+
+          ?>
+      ```
+
+    **Vấn đề 24: Tạo mảng sử dụng hàm range()**
+
+    + Sử dụng hàm range để tạo ra các phần tử của mảng.
+
+
+      ```sh
+          <?php
+
+              $array = range(0,10);
+
+
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+          ?>
+      ```
+
+    **Vấn đề 25: tạo mảng bằng cách sử dụng hàm array_combine?**
+
+    + Sử dụng hàm `array_combine($key,$value)` để tạo một mảng mới có khóa được lấy từ mảng $key và giá trị được lấy từ mảng $value theo tuần tự.
+
+
+      ```sh
+          <?php
+
+              $key = array("name","time","total");
+              $value = array("PHP",100,2000);
+
+              $newArr = array_combine($key,$value);
+
+
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+          ?>
+      ```
+
+    **Vấn đề 26: Các trường hợp so sánh giữa hai mảng?**
+
+    + TH1: So sánh khác nhau
+
+      + `array_diff($array1,$array2)` trả về một mảng bao gồm các phần trư có gá trị tồn tại trong mảng $array1 nhưng không tồn tại trong mảng $array2.
+
+      + `array_diff_key($array1,$array2)` trả về một mảng bao gồm các phần tử có khóa tồn tại trong mảng $array1 nhưng không tồn tại trong mảng $array2.
+
+      + `array_diff_assoc($array1,$array2)` trả về một mảng bao gồm các phần tử có khóa và giá trị tồn tại trong mảng $array1 nhưng không tồn tại trong mảng $array2.
+
+
+      ```sh
+          <?php
+
+             $array1  = array("name" => "PHP", "time" => 120,"zend","joomla");
+             $array2  = array("PHP",100);
+
+             $diff = array_diff($array1,$array2);
+
+
+              echo "<pre>";
+              print_r($array1);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($array2);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($diff);
+              echo "</pre>";
+          ?>
+      ```
+
+    + TH2: So sánh giống nhau
+
+      + `array_intersect($array1,$array2)` trả về một mảng bao gồm các phần tử giống nhau về giá trị giữa 2 mảng $array1 và $array2.
+
+      + `array_intersect_key($array1,$array2)` trả về một mảng bao gồm các phần trư giống nhau về khóa giữa 2 mảng $array 1 và $array2.
+
+      + `array_intersect_assoc($array1,$array2)` trả về một mảng bao gồm các phần tử giống nhau về khóa và giá trị giữa hai mảng $array1 và $array2.
+
+      ```sh
+          <?php
+
+             $array1  = array("name" => "PHP", "time" => 120,"zend","joomla");
+             $array2  = array("PHP","time" => 120);
+
+             $diff = array_intersect_assoc($array1,$array2);
+             $diff = array_diff($array1,$array2);
+
+
+              echo "<pre>";
+              print_r($array1);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($array2);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($diff);
+              echo "</pre>";
+          ?>
+      ```
+
+    **Vấn đề 27: Xử lý giá trị các phần tử cra mảng?**
+
+    + Hàm `array_walk` sẽ gửi cá c giá trị của mảng đến một hàm nào đó để xử lý và nhận kết quả trả về là một mảng mới.
+
+      ```sh
+          <?php
+
+             $array  = array("name" => "PHP", "time" => 120,"zend","joomla");
+             
+             function myFunction  ($value, $key, $param){
+                  echo $key.":".$value."< br/>";
+             }
+
+             array_walk($array,"myFunction","-");
+          ?>
+      ```
+
+    **Vấn đề 28: tìm hiểu array_map?**
+
+    + Hàm `array_map` sẽ gửi các giá trị của một hay nhiều mảng đến một hàm nào đó để xử lý và nhận kết quả trả về là một mảng mới.
+
+
+      ```sh
+          <?php
+
+             $array  = array(2,3,1);
+
+             $newArr = array();
+             
+             foreach ($array as $key => $value){
+                  $newArr[] = ($value % 2 == 0) ? "even":"odd";
+             }
+
+             echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+
+          ?>
+      ```
+
+      ```sh
+          <?php
+
+             $array  = array(2,3,1);
+
+             
+             function checkNumber($number){
+                  $result  = ($number % 2 == 0) ? "even":"odd";
+                  return $result;
+             }
+
+             $newArr = array_map("checkNumber",$array);
+
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+
+          ?>
+      ```
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
