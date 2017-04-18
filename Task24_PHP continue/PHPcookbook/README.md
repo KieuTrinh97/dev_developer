@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 19/03/2017
+>Ngày cập nhật: 18/04/2017
 
 ##Mục lục:
 
@@ -58,6 +58,33 @@
  + [2.4 Operating on a Series of Integers](#2.4)
 
  + [2.5 Generating Random Numbers Within a Range](#2.5)
+
+ + [2.6 Generating Predictable Random Numbers](#2.6)
+
+ + [2.7 Generating Biased Random Numbers](#2.7)
+
+ + [2.8 Taking Logarithms](#2.8)
+
+ + [2.9 Calculating Exponents](#2.9)
+
+ + [2.10 Formatting Numbers](#2.10)
+
+ + [2.11 Formatting Monetary Values](#2.11)
+
+ + [2.12 Printing Correct Plurals](#2.12)
+
+ + [2.13 Calculating Trigonometric Functions](#2.13)
+
+ + [2.14 Doing Trigonometry in Degrees, Not Radians](#2.14)
+
+ + [2.15 Handling Very Large or Very Small Numbers](#2.15)
+
+ + [2.16 Converting Between Bases](#2.16)
+
+ + [2.17 Calculating Using Numbers in Bases Other Than
+Decimal](#2.17)
+
+ + [2.18 Finding the Distance Between Two Places](#2.18)
 
 
 ##Nội dung:
@@ -1278,6 +1305,217 @@ Dùng `mt_rand()` sẽ cho ra số nguyên ngẫu nhiên, giá trị lớn nhấ
 	$random_number = mt_rand($lower, $upper);
 
 ```
+
+####2.6 Generating Predictable Random Numbers<a name="2.6"></a>
+
+**Vấn đề**
+
+Bạn muốn tạo ra số ngẫu nhiên và có thể lặp lại.
+
+**Giải quyết**
+
+Dùng hàm `mt_srand()` hay `srand()`
+
+```sh
+	<?php
+		function pick_color() {
+		 $colors = array('red','orange','yellow','blue','green','indigo','violet');
+		 $i = mt_rand(0, count($colors) - 1);
+		 return $colors[$i];
+		}
+
+		mt_srand(34534);
+		$first = pick_color();
+		$second = pick_color();
+
+		print "$first is red and $second is yellow.";
+
+```
+
+ + Chức năng của hàm là lấy ra một phần tử ngẫu nhiên từ một mảng với điều kiện bạn đang kiểm tra cho thấy sự thay đổi mỗi lần chạy thử nếu số của bạn thực sự ngẫu nhiên. 
+
+ + Nhưng bằng cách gọi `Mt_srand ()` hay `srand ()` với một giá trị cụ thể khi bắt đầu bài kiểm tra của bạn,thấy rằng các dãy số ngẫu nhiên được tạo ra là giống nhau.
+
+####2.7 Generating Biased Random Numbers<a name="2.7"></a>
+
+**Vấn đề**
+
+Bạn muốn tạo ra các số ngẫu nhiên, nhưng các con số trong một số phạm vi nhất định xuất hiện thường xuyên hơn những số khác.
+
+**Giải quyết**
+
+ + Dùng hàm  `rand_weighted()`
+
+```sh
+		function rand_weighted($numbers) {
+		 $total = 0;
+		 foreach ($numbers as $number => $weight) {
+		 $total += $weight;
+		 $distribution[$number] = $total;
+		 }
+		 $rand = mt_rand(0, $total - 1);
+
+		 foreach ($distribution as $number => $weights) {
+		 if ($rand < $weights) { return $number; }
+		 }
+		}
+
+```
+
+
+####2.8 Taking Logarithms<a name="2.8"></a>
+
+**Vấn đề**
+
+Bạn muốn lấy `log` của một sô.
+
+**Giải quyết**
+
+Dùng hàm `log()`
+
+```sh
+		$log = log(10);
+
+		$log10 = log10(10);
+
+		$log2 = log(10, 2);
+
+``` 
+
++ Cả ` log()` và `log10()` chỉ xác định khi số lớn hơn 0.
+
+####2.9 Calculating Exponents<a name="2.9"></a>
+
+**Vấn đề**
+
+Bạn muốn năng lên một số lần.
+
+**Giải quyết**
+
+Dùng hàm ` exp()`
+
+```sh
+		$exp = exp(2);
+
+
+		$exp = pow( 2, M_E);
+		
+		$pow1 = pow( 2, 10);
+		
+		$pow2 = pow( 2, -2);
+		
+		$pow3 = pow( 2, 2.5);
+		
+		$pow4 = pow(-2, 10);
+		
+		$pow5 = pow(-2, -2.5);
+
+```
+
+####2.10 Formatting Numbers<a name="2.10"></a>
+
+**Vấn đề**
+
+Bạn có một số và muốn in nó với hàng ngàn và số thập phân. Ví dụ: bạn muốn hiển thị số người đã xem một trang hoặc phần trăm người đã bỏ phiếu cho một lựa chọn trong một cuộc thăm dò.
+
+**Giải quyết**
+
+Dùng hàm `number_format()`
+
+```sh
+		$number = 1234.56;
+		
+		$formatted1 = number_format($number);
+
+		$formatted2 = number_format($number, 2);
+
+		$formatted3 = number_format($number, 2, ",", ".");
+
+```
+
+####2.11 Formatting Monetary Values<a name="2.11"></a>
+
+**Vấn đề**
+
+Bạn có một số và bạn muốn in nó với hàng ngàn và dấu thập phân thập phân. Ví dụ: bạn muốn hiển thị giá cho các mặt hàng trong giỏ hàng.
+
+**Giải quyết**
+
+Dùng ` NumberFormatter::CURRENCY`
+
+```sh
+		$number = 1234.56;
+		
+		$usa = new NumberFormatter("en-US", NumberFormatter::CURRENCY);
+		$formatted1 = $usa->format($number);
+		
+		$france = new NumberFormatter("fr-FR", NumberFormatter::CURRENCY);
+		$formatted2 = $france->format($number);
+
+```
+
+Kiểu định dạng NumberFormatter :: CURRENCY định dạng một số bằng cách chèn ký hiệu tiền tệ chính xác, thập phân, và dấu phân cách hàng nghìn thể hiện đối tượng.
+
+####2.12 Printing Correct Plurals<a name="2.12"></a>
+
+**Vấn đề**
+
+Bạn muốn ghép nhiều từ một cách chính xác dựa trên giá trị của một biến.
+
+**Giải quyết**
+
+Dùng biểu thức câu điều kiện
+
+```sh
+		$number = 4;
+		print "Your search returned $number " . ($number == 1 ? 'hit' : 'hits') . '.';
+```
+
+```
+Your search returned 4 hits.
+```
+
+
+####2.13 Calculating Trigonometric Functions<a name="2.13"></a>
+
+**Vấn đề**
+
+Bạn muốn sử dụng các hàm lượng giác như sin, cosine, và tiếp tuyến.
+
+**Giải quyết**
+
+PHP hỗ trợ các hàm lượng giác  sin(), cos(), and tan(), asin(), acos(), and atan().
+
+```sh
+	$result = cos(2 * M_PI);
+
+	$result = atan(M_PI / 4);
+
+```
+Bạn cũng có thể sử dụng các hàm hyperbolic: sinh (), cosh () và tanh (), asinh (), acosh () và atanh ().
+
+####2.14 Doing Trigonometry in Degrees, Not Radians<a name="2.14"></a>
+
+**Vấn đề**
+
+
+####2.15 Handling Very Large or Very Small Numbers<a name="2.15"></a>
+
+####2.16 Converting Between Bases<a name="2.16"></a>
+
+####2.17 Calculating Using Numbers in Bases Other Than
+Decimal<a name="2.17"></a>
+
+####2.18 Finding the Distance Between Two Places<a name="2.18"></a>
+
+
+
+
+
+
+
+
+
 
 
 
