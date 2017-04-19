@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 17/04/2017
+>Ngày cập nhật: 19/04/2017
 
 ##Mục lục:
 [Chương I: PHP cơ bản](#I)
@@ -28,13 +28,15 @@
 
  + [II.1.PHP Array](#II.1)
 
-      + [1.1Mảng trong PHP](#1.1)
+      + [1.1 Mảng trong PHP](#1.1)
 
-      + [1.2Mảng liên tục](#1.2)
+      + [1.2 Mảng liên tục](#1.2)
 
-      + [1.3Mảng không liên tục](#1.3)
+      + [1.3 Mảng không liên tục](#1.3)
 
-      + [1.4Các vấn đề](#1.4)
+      + [1.4 Các vấn đề](#1.4)
+
+      + [1.5 Các Ví dụ](#1.5)
 
 
 
@@ -1421,6 +1423,108 @@ Giá trị sẽ được chuyển về file proccess
 
           ?>
       ```
+
+   **Vấn đề 29: Trích xuất một đoạn phần tử từ mảng**
+
+   + `array_slice(array, offset,length, preserve)` trích xuất lấy một đoạn phần tử của mảng tử từ vị trí bắt đầu offset( vị trí bắt đầu trong mảng là 0) và lấy length phần tử.
+
+    ```sh
+          <?php
+
+             $array  = array("a","b","c","d","e");
+
+                 
+             $newArr = array_slice($array,2,2,false);//c,d
+
+             
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+
+          ?>
+      ```
+
+   **Vấn đề 30: Thay thế một đoạn phần tử của mảng?**
+
+   + `array_splice(array1,offset,length,array2 )` xóa bỏ một đoạn phần tử của mảng array1 từ v ị trí offset và lấy length phần tử. sau đó thay thế các phần tử bị loại bỏ bằng mảng array2.
+
+
+    ```sh
+          <?php
+
+             $array  = array("a","b","c","d","e");
+               
+            
+              echo "Input";          
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+
+
+              $newArr = array_splice($array,2);
+
+              echo "<pre>";
+              print_r($newArr);
+              echo "</pre>";
+
+              echo "Ouput";          
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+          ?>
+    ```
+
+    **Vấn đề 31: các trường hợp sắp xếp mảng**
+
+    + Sắp xếp theo giá trị
+
+      + `sort(array)` sắp xếp các phần tử trong mảng array tăng dần theo giá trị.
+
+      + `rsort(array)` sắp xếp các phần tử trong mảng array giảm dần theo giá trị.
+
+    + Sắp xếp theo khóa
+
+      + `ksort(array)` sắp xếp các phần tử trong mảng array tăng dần theo khóa.
+
+      + `krsort(array)` sắp xếp các phần tử trong mảng array giảm dần theo khóa.
+
+    ```sh
+          <?php
+
+             $array  = array(1,4,2,14,19,23);
+               
+            
+              echo "Input";          
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+
+
+              sort($array);//tang dan
+
+
+              
+              echo "Ouput";          
+              echo "<pre>";
+              print_r($array);
+              echo "</pre>";
+          ?>
+    ```
+
+####1.5 Các Ví dụ<a name="1.5"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
