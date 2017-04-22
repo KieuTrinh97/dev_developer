@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 18/04/2017
+>Ngày cập nhật: 22/04/2017
 
 ##Mục lục:
 
@@ -85,6 +85,37 @@
 Decimal](#2.17)
 
  + [2.18 Finding the Distance Between Two Places](#2.18)
+
+[CHAPTER 3: DATES AND TIMES](#3)
+
+	[3.1 Finding the Current Date and Time](#3.1)
+
+	[3.2 Converting Time and Date Parts to an Epoch Timestamp](#3.2)
+
+	[3.3 Converting an Epoch Timestamp to Time and Date Parts](#3.3)
+
+	[3.4 Printing a Date or Time in a Specified Format](#3.4)
+
+	[3.5 Finding the Difference of Two Dates](#3.5)
+
+	[3.6 Finding the Day in a Week, Month, or Year](#3.6)
+
+	[3.7 Validating a Date](#3.7)
+
+	[3.8 Parsing Dates and Times from Strings](#3.8)
+
+	[3.9 Adding to or Subtracting from a Date](#3.9)
+
+	[3.10 Calculating Time with Time Zones and Daylight Saving Time](#3.10)
+
+	[3.11 Generating a High-Precision Time](#3.11)
+
+	[3.12 Generating Time Ranges](#3.12)
+
+	[3.13 Using Non-Gregorian Calendars](#3.13)
+
+	[3.14 Program: Calendar](#3.14)
+
 
 
 ##Nội dung:
@@ -1498,15 +1529,282 @@ Bạn cũng có thể sử dụng các hàm hyperbolic: sinh (), cosh () và tan
 
 **Vấn đề**
 
+Tính khoảng cách giữa 2 điểm trong PHP
+
+**Giải quyết**
+
+Dùng hàm `deg2rad()` và `rad2deg()`
+
+```sh
+	$degree = 90;
+	
+	$cosine = cos(deg2rad($degree));
+
+```
+
++ Ta có: 360=2π(rad), vì vậy rất dễ dàng chuyển đổi giữa hai định dạng theo cách thủ công.
+
++ Các chức năng của PHP sử dụng giá trị của π, vì vậy bạn được đảm bảo một câu trả lời có độ chính xác cao. Để truy cập số này cho các tính toán khác, sử dụng M_PI không đổi, là 3,14159265358979323846. 
+
 
 ####2.15 Handling Very Large or Very Small Numbers<a name="2.15"></a>
 
+**Vấn đề**
+
+Bạn cần phải sử dụng các con số quá lớn (hoặc nhỏ) của PHP.
+
+**Giải quyết**
+
+Dùng ` BCMath`:
+
+```sh
+	// $sum = "9999999999999999"
+	$sum = bcadd('1234567812345678', '8765432187654321');
+
+```
+
+Dùng `GMP`:
+
+```sh
+	$sum = gmp_add('1234567812345678', '8765432187654321');
+	// $sum is now a GMP resource, not a string; use gmp_strval() to convert
+	print gmp_strval($sum); // prints 9999999999999999
+```
+
+Thư viện BCMath rất dễ sử dụng. Bạn truyền số của bạn như là chuỗi, và hàm trả về tổng hợp như một chuỗi. Phạm vi các hành động mà bạn có thể áp dụng cho các số sử dụng BCMath được giới hạn ở số học cơ bản
+
+
 ####2.16 Converting Between Bases<a name="2.16"></a>
+
+**Vấn đề**
+
+Bạn cần phải chuyển đổi một số từ một cơ sở khác.
+
+**Giải quyết**
+
+Dùng hàm ` base_convert()`:
+
+```sh
+	// hexadecimal number (base 16)
+	$hex = 'a1';
+	// convert from base 16 to base 10
+	// $decimal is '161'
+	$decimal = base_convert($hex, 16, 10);
+
+```
+
+Hàm base_convert () thay đổi một chuỗi đại diện cho một số trong một cơ sở để Các chuỗi chính xác trong cơ sở khác. Nó hoạt động cho tất cả các cơ sở từ 2 đến 36 bao gồm, sử dụng các ký tự a đến z
 
 ####2.17 Calculating Using Numbers in Bases Other Than
 Decimal<a name="2.17"></a>
 
+**Vấn đề**
+
+Bạn muốn thực hiện các phép toán với các con số được định dạng không phải là thập phân, nhưng trong bát phân hoặc thập lục phân.
+
+**Giải quyết**
+
+Số prefix là biểu tượng hàng đầu. Ký hiệu 0b cho biết nhị phân (cơ sở 2), ký hiệu hàng đầu 0 cho biết bát phân (cơ sỞ 8) và
+Biểu tượng hàng đầu 0x chỉ ra hệ thập lục phân (cơ sở 16).
+
 ####2.18 Finding the Distance Between Two Places<a name="2.18"></a>
+
+**Vấn đề**
+
+Bạn muốn tìm khoảng cách giữa hai tọa độ trên hành tinh Trái Đất.
+
+**Giải quyết**
+
+Dùng hàm `sphere_distance()`
+
+```sh
+	function sphere_distance($lat1, $lon1, $lat2, $lon2, $radius = 6378.135) {
+	 $rad = doubleval(M_PI/180.0);
+	 $lat1 = doubleval($lat1) * $rad;
+	 $lon1 = doubleval($lon1) * $rad;
+	 $lat2 = doubleval($lat2) * $rad;
+	 $lon2 = doubleval($lon2) * $rad;
+	 $theta = $lon2 - $lon1;
+	 $dist = acos(sin($lat1) * sin($lat2) +
+	 cos($lat1) * cos($lat2) *
+	 cos($theta));
+	 if ($dist < 0) { $dist += M_PI; }
+	 // Default is Earth equatorial radius in kilometers
+	 return $dist = $dist * $radius;
+	}
+	// NY, NY (10040)
+	$lat1 = 40.858704;
+	$lon1 = -73.928532;
+	// SF, CA (94144)
+	$lat2 = 37.758434;
+	$lon2 = -122.435126;
+	$dist = sphere_distance($lat1, $lon1, $lat2, $lon2);
+
+	// It's about 2570 miles from NYC to SF
+	// $formatted is 2570.18
+	$formatted = sprintf("%.2f", $dist * 0.621); // Format and convert to miles
+
+
+```
+
+###CHAPTER 3: DATES AND TIMES<a name="3"></a>
+
+####3.1 Finding the Current Date and Time<a name="3.1"></a>
+
+** Vấn đề**
+
+Bạn muốn biết thời gian và ngày.
+
+**Giải quyết**
+
+Dùng hàm `date()`
+
+```sh
+	print date('r');
+```
+
+Nó phụ thuộc vào thời gian và ngày mã chạy.
+
+Dùng hàm `format()` cũng hoạt động như `date()`
+
+```sh
+	$when = new DateTime();
+	print $when->format('r');
+
+```
+
+Dùng hàm  `getdate()` hay `localtime()` để biết được từng phần của time
+
+```sh
+	$now_1 = getdate();
+	$now_2 = localtime();
+	print "{$now_1['hours']}:{$now_1['minutes']}:{$now_1['seconds']}\n";
+	print "$now_2[2]:$now_2[1]:$now_2[0]";
+
+```
+
+```sh
+	18:23:45
+	18:23:45
+
+```
+
+Dùng hàm ` getdate()` để in ra ngày, tháng, năm
+
+```sh
+	$a = getdate();
+	printf('%s %d, %d',$a['month'],$a['mday'],$a['year']);
+
+```
+
+```sh
+	February 4, 2013
+```
+
+Dùng hàm ` localtime()` để in ra ngày/tháng/năm
+
+```sh
+	$a = localtime();
+	$a[4] += 1;
+	$a[5] += 1900;
+	print "$a[4]/$a[3]/$a[5]";
+
+```
+
+```sh
+	2/4/2013
+```
+
+####3.2 Converting Time and Date Parts to an Epoch Timestamp<a name="3.2"></a>
+
+**Vấn đề**
+
+Bạn muốn biết dấu / thời gian  tương ứng với một tập hợp các phần thời gian và ngày tháng.
+
+**Giải quyết**
+
+Dùng hàm `mktime()` nếu là giờ địa phương.
+
+```sh
+	// 7:45:03 PM on March 10, 1975, local time
+	// Assuming your "local time" is US Eastern time
+	$then = mktime(19,45,3,3,10,1975);
+```
+
+Dùng hàm `gmmktime()` nếu phần thời gian và ngày của bạn là giờ chuẩn quốc tế.
+
+```sh
+	// 7:45:03 PM on March 10, 1975, in GMT
+	$then = gmmktime(19,45,3,3,10,1975);
+
+```
+
+Dùng `DateTime::createFromFormat()` nếu phần thời gian và ngày của bạn là chuỗi thời gian được định dạng.
+
+```sh
+	// 7:45:03 PM on March 10, 1975, in a particular timezone
+	$then = DateTime::createFromFormat(DateTime::ATOM, "1975-03-10T19:45:03-04:00");
+```
+
+
+####3.3 Converting an Epoch Timestamp to Time and Date Parts<a name="3.3"></a>
+
+**Vấn đề**
+
+Bạn muốn thời gian và ngày tương ứng với dâu /ngày cụ thể
+
+**Gải quyết**
+
+Dùng getdate(): $time_parts = getdate(163727100);
+
+Các phần thời gian sẽ trả lại bởi `getdate()`.
+
+####3.4 Printing a Date or Time in a Specified Format<a name="3.4"></a>
+
+**Vấn đề**
+
+Bạn cần in ra định dạng thời gian hoặc ngày một cách cụ thể.
+
+** Giải quyết**
+
+Dùng `date()` hay  `DateTime::format()`
+
+```sh
+	print date('d/M/Y') . "\n";
+	$when = new DateTime();
+	print $when->format('d/M/Y');
+
+```
+
+```sh
+	06/Feb/2013
+	06/Feb/2013
+```
+
+Cả  date() và DateTime::format() như nhau để tạo ra một chuỗi ngày và giờ.
+
+
+####3.5 Finding the Difference of Two Dates<a name="3.5"></a>
+
+	[3.6 Finding the Day in a Week, Month, or Year](#3.6)
+
+	[3.7 Validating a Date](#3.7)
+
+	[3.8 Parsing Dates and Times from Strings](#3.8)
+
+	[3.9 Adding to or Subtracting from a Date](#3.9)
+
+	[3.10 Calculating Time with Time Zones and Daylight Saving Time](#3.10)
+
+	[3.11 Generating a High-Precision Time](#3.11)
+
+	[3.12 Generating Time Ranges](#3.12)
+
+	[3.13 Using Non-Gregorian Calendars](#3.13)
+
+	[3.14 Program: Calendar](#3.14)
+
+
 
 
 
