@@ -88,33 +88,33 @@ Decimal](#2.17)
 
 [CHAPTER 3: DATES AND TIMES](#3)
 
-	[3.1 Finding the Current Date and Time](#3.1)
+ + [3.1 Finding the Current Date and Time](#3.1)
 
-	[3.2 Converting Time and Date Parts to an Epoch Timestamp](#3.2)
+ + [3.2 Converting Time and Date Parts to an Epoch Timestamp](#3.2)
 
-	[3.3 Converting an Epoch Timestamp to Time and Date Parts](#3.3)
+ + [3.3 Converting an Epoch Timestamp to Time and Date Parts](#3.3)
 
-	[3.4 Printing a Date or Time in a Specified Format](#3.4)
+ + [3.4 Printing a Date or Time in a Specified Format](#3.4)
 
-	[3.5 Finding the Difference of Two Dates](#3.5)
+ + [3.5 Finding the Difference of Two Dates](#3.5)
 
-	[3.6 Finding the Day in a Week, Month, or Year](#3.6)
+ + [3.6 Finding the Day in a Week, Month, or Year](#3.6)
 
-	[3.7 Validating a Date](#3.7)
+ + [3.7 Validating a Date](#3.7)
 
-	[3.8 Parsing Dates and Times from Strings](#3.8)
+ + [3.8 Parsing Dates and Times from Strings](#3.8)
 
-	[3.9 Adding to or Subtracting from a Date](#3.9)
+ + [3.9 Adding to or Subtracting from a Date](#3.9)
 
-	[3.10 Calculating Time with Time Zones and Daylight Saving Time](#3.10)
+ + [3.10 Calculating Time with Time Zones and Daylight Saving Time](#3.10)
 
-	[3.11 Generating a High-Precision Time](#3.11)
+ + [3.11 Generating a High-Precision Time](#3.11)
+ 
+ + [3.12 Generating Time Ranges](#3.12)
 
-	[3.12 Generating Time Ranges](#3.12)
+ + [3.13 Using Non-Gregorian Calendars](#3.13)
 
-	[3.13 Using Non-Gregorian Calendars](#3.13)
-
-	[3.14 Program: Calendar](#3.14)
+ + [3.14 Program: Calendar](#3.14)
 
 
 
