@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 22/04/2017
+>Ngày cập nhật: 02/05/2017
 
 ##Mục lục:
 
@@ -1786,13 +1786,129 @@ Cả  date() và DateTime::format() như nhau để tạo ra một chuỗi ngày
 
 ####3.5 Finding the Difference of Two Dates<a name="3.5"></a>
 
-	[3.6 Finding the Day in a Week, Month, or Year](#3.6)
+**Vấn đề**
 
-	[3.7 Validating a Date](#3.7)
+Bạn muốn nói với một người dùng khoảng thời gian kể từ lần đăng nhập lần cuối vào trang web của bạn.
 
-	[3.8 Parsing Dates and Times from Strings](#3.8)
+**Giải quyết**
 
-	[3.9 Adding to or Subtracting from a Date](#3.9)
+Dùng ` DateTime::diff()`
+
+```sh
+	// 7:32:56 pm on May 10, 1965
+	$first = new DateTime("1965-05-10 7:32:56pm",
+	 new DateTimeZone('America/New_York'));
+	// 4:29:11 am on November 20, 1962
+	$second = new DateTime("1962-11-20 4:29:11am",
+	 new DateTimeZone('America/New_York'));
+	$diff = $second->diff($first);
+	printf("The two dates have %d weeks, %s days, " .
+	 "%d hours, %d minutes, and %d seconds " .
+	 "elapsed between them.",
+	 floor($diff->format('%a') / 7),
+	 $diff->format('%a') % 7,
+	 $diff->format('%h'),
+	 $diff->format('%i'),
+	 $diff->format('%s'));
+
+```
+
+```sh
+	The two dates have 128 weeks, 6 days, 15 hours, 3 minutes, and 45 seconds
+	elapsed between them.
+
+```
+
+####3.6 Finding the Day in a Week, Month, or Year<a name="3.6"></a>
+
+**Vấn đề**
+
+Bạn muốn biết ngày hoặc tuần của năm, ngày của tuần, hoặc ngày của tháng. Ví dj, bạn muốn in ra một thông điệp đặc biệt mỗi ngày thứ hai hoặc vào ngày đầu tiên của tháng.
+
+**Cách giải quyết**
+
+Dùng `date()` hoặc `DateTime::format()`
+
+```sh
+	print "Today is day " . date('d') . ' of the month and ' . date('z') .
+ 	' of the year.';
+	print "\n";
+	$birthday = new DateTime('January 17, 1706', new DateTimeZone('America/New_York'));
+	print "Benjamin Franklin was born on a " . $birthday->format('l') . ", " .
+	"day " . $birthday->format('N') . " of the week.";
+
+```
+
+Có nhiều cách khác nhau để tính số tuần và ngày trong một tuần, vì vậy hãy cẩn thận để chọn số thích hợp.
+
+
+
+####3.7 Validating a Date<a name="3.7"></a>
+
+**Vấn đề**
+
+Bạn muốn kiểm tra nếu một ngày là hợp lệ. Ví dụ: bạn muốn đảm bảo người dùng không cung cấp ngày sinh như ngày 30 tháng 2 năm 1962.
+
+**Giải quyết**
+
+Dùng `checkdate()`
+
+```sh
+	// $ok is true - March 10, 1993 is a valid date
+	$ok = checkdate(3, 10, 1993);
+	// $not_ok is false - February 30, 1962 is not a valid date
+	$not_ok = checkdate(2, 30, 1962);
+
+```
+
+ + Chức năng hàm `Checkdate()` trả về giá trị `true` nếu `$month` là từ 1 đến 12, `$year` là từ 1 đến 32767, và `$day` là từ 1 đến số ngày tối đa chính xác cho `$month` và `$year`. Năm nhuận được xử lý chính xác bởi `checkdate()`, và ngày được trả lại Sử dụng lịch Gregorian.
+
+ + Chức năng đầu tiên sử dụng `checkdate()` để đảm bảo rằng `$month`, `$day` và `$year` gửi lại ngày hợp lệ.
+
+
+
+
+####3.8 Parsing Dates and Times from Strings<a name="3.8"></a>
+
+**Vấn đề**
+
+Bạn cần phải có được một ngày hoặc thời gian trong một chuỗi để tính toán. Ví dụ: bạn muốn chuyển đổi các ngày như "thứ năm tuần trước" hoặc "9 tháng 2 năm 2004" thành dấu thời gian lịch sử.
+
+**Giải quyết**
+
+Dùng `strtotime()`
+
+```sh
+	$a = strtotime('march 10'); // defaults to the current year
+	$b = strtotime('last thursday');
+	$c = strtotime('now + 3 months');
+
+```
+
+Cách dùng ` strtotime()` thì phức tạp.
+
+```sh
+	$a = strtotime('now');
+	print date(DATE_RFC850, $a);
+	print "\n";
+	$a = strtotime('today');
+	print date(DATE_RFC850, $a);
+```
+
+```sh
+	Tuesday, 12-Feb-13 19:12:14 UTC
+	Tuesday, 12-Feb-13 00:00:00 UTC
+```
+
+####3.9 Adding to or Subtracting from a Date<a name="3.9"></a>
+
+**Vấn đề**
+
+Bạn cần thêm hoặc xóa một khoảng từ một ngày.
+
+**Giải quyết**
+
+
 
 	[3.10 Calculating Time with Time Zones and Daylight Saving Time](#3.10)
 
