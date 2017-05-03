@@ -5,7 +5,7 @@
 >
 >Người thực hiện: Võ Thị Kiều Trinh
 >
->Ngày cập nhật: 19/04/2017
+>Ngày cập nhật: 03/05/2017
 
 ##Mục lục:
 [Chương I: PHP cơ bản](#I)
@@ -37,6 +37,10 @@
       + [1.4 Các vấn đề](#1.4)
 
       + [1.5 Các Ví dụ](#1.5)
+
+ + [II.2.PHP String](#II.2)
+
+     + [2.1 Các vấn đề](#2.1)
 
 
 
@@ -1511,8 +1515,169 @@ Giá trị sẽ được chuyển về file proccess
           ?>
     ```
 
-####1.5 Các Ví dụ<a name="1.5"></a>
+##II.2 PHP String<a name="II.2"></a>
 
+####2.1 Các ví dụ <a name="2.1"></a>
+
+**Vấn đề 01: Khái niệm string được hiểu như thế nào?**
+
+  + Khái niệm string được hiểu như là chuỗi, văn bản.
+
+  + Biến kiếu string được sử dụng để lưu trữ các giá trị có chứa ký tự. các giá trị này luôn nằm trong cặp dấu nháy đôi hoặc dấu nháy đơn.
+
+**Vấn đề 02: Hiển thị ký tự nháy đơn và nháy đôi trong chuỗi**
+
+ + Vì dấu nháy đơn và nháy đôi là các ký tự đặc biệt do đó để hiện thị các ký tự này trong chuỗi chúng ta sử dụng thêm ký tự \.
+
+
+```sh
+  <?php
+      $str  = "PHP is easy";
+
+      echo $str;
+  ?>
+```
+
+**Vấn đề 03: Nối hai hay nhiều chuỗi lại với nhau?**
+
+ + Sử dụng dấu chấm (kí hiệu .) để nối các giá trị kiểu chuỗi lại với nha thành một giá trị duy nhất.
+
+ + Lưu ý phân biệt giữa dấu cộng (+) và dấu chấm (.)
+
+ + viết hàm nối 2 chuỗi bất kỳ bởi một ký tự nối nào đó.
+
+```sh
+  <?php
+    $str  = '"PHP"'\'is\' easy\\';//"php" 'is' easy \
+
+    echo $str;
+  ?>
+```
+
+```sh
+  //case 01
+  echo "PHP is easy <br/>";
+
+  //case 02
+  $php  = "PHP";
+  $is   = "is";
+  $easy = "easy <br/>";
+
+  echo $php . $is . $easy;
+
+  //case 03
+  $php  = "PHP";
+  $is   = "is";
+  $easy = "easy <br/>";
+
+  echo $php ." " .$is ." ". $easy;
+
+
+```
+
+
+```sh
+  <?php
+      $case1 = "PHP"."is easy<br/>";
+
+      $case2 = 1 . 2;
+      $case3 = 1.2;
+      $case4 = 1+2;
+
+      echo $case4;
+      var_dump($case4);
+  ?>
+```
+
+```sh
+    <?php
+      function joinString($str1, $str2, $joinCharacter = " ")
+      {
+      $result = $str1 .$joinCharacter . $str2;
+      return $result;
+      }
+      $result = joinString("PHP","is easy ","----");
+      echo $result;
+    ?>
+```
+
+**Vấn đề 04: Đếm tổng số ký tự có trong chuỗi?**
+
+ + Tổng số ký tự có trong chuỗi, chúng ta thường gọi là chiều dài của chuỗi.
+
+ + Trong PHp để lấy chiều dài của chuỗi, chúng ta sử dụng hàm strlen().
+
+ + lưu ý trường hợp chuỗi có chứa các ký tự UTF-8 chúng ta sử dụng hàm mb_strlen().
+
+```sh
+    <?php
+        $str = "Nguyễn Văn Bình";
+        $lenght = mb_strlen($str, "UTF-8");
+
+        echo $lenght;
+        var_dump($str);
+
+    ?>
+```
+
+**Vấn đề 05: Đếm số từ có trong chuỗi?**
+
+ + Chúng ta sử dụng hàm str_word_count để đếm số từ xuất hiện trong chuỗi.
+
+```sh
+    <?php
+      $str = "PHP is easy";//3
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+      $worldCount = str_word_count($str);
+
+      echo $worldCount;
+    ?>
+```
+
+**Vấn đề 06: Chuyển đổi chữ thường thành chữ hoa và ngược lại**
+
+ + Để chuyển đổi chữ thường thành chữ HOA, chúng ta dùng hàm strtoupper($str). Ngược lại, a dùng hàm strtolower($str).
+
+ + Chuyển đổi ký tự đầu tiên trong chuỗi thành chữ HOA `ucfirst($str)`.
+
+ + Chuyển đối ký tự đầu tiên trong chuỗi thành chữ thường lcfirst($str).
+
+ + Chuyển đổi tất cả các ký tự đầu tiên của các từ trong một chuỗi thành chữ in HOA ucwords($str).
+
+```sh
+      <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Insert title here</title>
+      </head>
+      <body>
+      <?php
+        $str  = "PHP is easy";
+
+      ?>
+
+        <div class="content">
+          <h1>Chuyển đổi chữ hoa chữ thường</h1>
+          <ul class="function">
+            <li><span>source</span><?php echo $str;?></li>
+            <li><span>strtoupper</span><?php echo strtoupper($str);?></li>
+            <li><span>strolower</span><?php echo strolower($str);?></li>
+            <li><span>ucfirst</span><?php echo ucfirst($str);?></li>
+            <li><span>lcfirst</span><?php echo lcfirst($str);?></li>
+          </ul>
+        </div>
+      </body>
+      </html>
+```
+
+**Vấn đề 07: Tìm kiếm vị trí xuất hiện của một tywf nào đó trong chuỗi?**
+
+ + Sử dụng hàm `strpos()` để tìm kiếm chỉ số xuất hiện đầu tiên cra một từ nào đó trong chuỗi.
+
+ + Sử dụng hàm `strripos()` để tìm kiếm chỉ số xuất hiện cuối cùng của một từ nào đó trong chuỗi.
+
+ + Lưu ý: `strpos()` và `strrpost()` dành cho PHP version 4.
 
 
 
