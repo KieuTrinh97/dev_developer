@@ -1908,13 +1908,119 @@ Bạn cần thêm hoặc xóa một khoảng từ một ngày.
 
 **Giải quyết**
 
+Dùng ` DateTime::add()` hoặc `DateTime::sub()`
+
+```sh
+	$birthday = new DateTime('March 10, 1975');
+
+	// When is 40 weeks before $birthday?
+	$human_gestation = new DateInterval('P40W');
+	$birthday->sub($human_gestation);
+	print $birthday->format(DateTime::RFC850);
+	print "\n";
+
+	// What if it was an elephant, not a human?
+	$elephant_gestation = new DateInterval('P616D');
+	$birthday->add($elephant_gestation);
+	print $birthday->format(DateTime::RFC850);
 
 
-	[3.10 Calculating Time with Time Zones and Daylight Saving Time](#3.10)
+```
+Thời gian mang thai trung bình của con người là 40 tuần. Mặt khác, con voi có thời gian mang thai trung bình 616 ngày. Vì vậy, thêm một khoảng thời gian vào thời điểm thụ thai này sẽ tạo ra ngày dự kiến của một con voi sinh ra cùng thời gian với con người.
 
-	[3.11 Generating a High-Precision Time](#3.11)
 
-	[3.12 Generating Time Ranges](#3.12)
+####3.10 Calculating Time with Time Zones and Daylight Saving Time<a name="3.10"></a>
+
+**Đặt vấn đề**
+
+Bạn cần phải tính toán thời gian ở các múi giờ khác nhau. Ví dụ: bạn muốn cung cấp cho người dùng thông tin được điều chỉnh theo giờ địa phương của họ chứ không phải giờ địa phương của máy chủ của bạn.
+
+**Giải quyết**
+
+Dùng `DateTimeZone`
+
+```sh
+	$nowInNewYork = new DateTime('now', new DateTimeZone('America/New_York'));
+
+	$nowInCalifornia = new DateTime('now', new DateTimeZone('America/Los_Angeles'));
+
+	printf("It's %s in New York but %s in California.",
+	 $nowInNewYork->format(DateTime::RFC850),
+	 $nowInCalifornia->format(DateTime::RFC850));
+```
+	
+```sh
+	It's Friday, 15-Feb-13 14:50:25 EST in New York but
+	Friday, 15-Feb-13 11:50:25 PST in California.
+
+```
+
+Chú ý: chọn hiển thị giờ địa phương là phù hợp nhất.
+
+Múi giờ mặc định của PHP được thiết lập theo yêu cầu khởi động bởi cấu hình ngày múi giờ tham số. Thay đổi này bằng cách gọi date_default_time_zone_set (); đã tải múi giờ đến mặc định mới cho đến khi thay đổi lại hoặc kết thúc yêu cầu.
+
+```sh
+	$now = time();
+	date_default_timezone_set('America/New_York');
+	print date(DATE_RFC850, $now);
+	print "\n";
+	date_default_timezone_set('Europe/Paris');
+	print date(DATE_RFC850, $now);
+```
+
+####3.11 Generating a High-Precision Time<a name="3.11"></a>
+
+**Vấn đề**
+
+Bạn cần phải đo thời gian với độ phân giải tốt hơn độ phân giải một giây - ví dụ như để tạo một ID duy nhất hoặc chuẩn một cuộc gọi chức năng.
+
+**Giải quyết**
+
+Sử dụng microtime (true) để có được thời gian hiện tại trong vài giây và micro giây.
+
+```sh
+	$start = microtime(true);
+	for ($i = 0; $i < 1000; $i++) {
+	 preg_match('/age=\d{1,5}/',$_SERVER['QUERY_STRING']);
+	}
+	$end = microtime(true);
+	$elapsed = $end - $start;
+
+```
+
+####3.12 Generating Time Ranges<a name="3.12"></a>
+
+**Vấn đề**
+
+Bạn cần phải biết tất cả các ngày trong một tuần hoặc một tháng. Ví dụ, bạn muốn in ra một danh sách các cuộc hẹn trong một tuần.
+
+**Giải quyết**
+
+```sh
+	// Start on August 1
+	$start = new DateTime('August 1, 2014');
+	// End date is exclusive, so this will stop on August 31
+	$end = new DateTime('September 1, 2014');
+	// Go 1 day at a time
+	$interval = new DateInterval('P1D');
+	$range1 = new DatePeriod($start, $interval, $end);
+```
+
+Cách khác:
+
+```sh
+	// Start on August 1
+	$start = new DateTime('August 1, 2014');
+	// Go 1 day at a time
+	$interval= new DateInterval('P1D');
+	// Recur 30 times more after the first occurrence.
+	$recurrences = 30;
+	$range2 = new DatePeriod($start, $interval, $recurrences);
+
+```
+
+
+
 
 	[3.13 Using Non-Gregorian Calendars](#3.13)
 
